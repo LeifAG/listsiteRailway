@@ -162,6 +162,11 @@ class SharedListCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse_lazy('lista-sida', kwargs={'pk': self.kwargs['pk']})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['list_id'] = self.kwargs.get('pk')
+        return context
+    
     def form_valid(self, form):
         email = form.cleaned_data['email']
         try:
