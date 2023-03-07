@@ -1,0 +1,14 @@
+{% extends "listapp/mall.html" %}
+{% load crispy_forms_tags %}
+
+{% block innehall %}
+<div class="container py-5">
+	<h1>Skapa konto</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form|crispy }}                    
+		<button class="btn btn-primary" type="submit">Registrera</button>
+	</form>
+	<p class="text-center">Har du redan ett konto, <a href="{% url 'loggain' %}">logga in</a> instället.</p>
+</div>
+{% endblock innehall %}

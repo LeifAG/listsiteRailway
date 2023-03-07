@@ -1,0 +1,17 @@
+{% extends "listapp/mall.html" %}
+{% load crispy_forms_tags %}
+
+{% block innehall %}
+<div class="container py-5">
+
+    <h1>Listor</h1>
+
+    <ul>
+    {% for lista in listor %}
+        <li><a href="{% url 'lista-sida' lista.id %}">{{lista.listname}}</a></li>
+    {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{% url 'lista-ny' %}">Ny lista</a>
+
+</div>
+{% endblock innehall %}

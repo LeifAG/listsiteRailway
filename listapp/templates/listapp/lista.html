@@ -1,0 +1,45 @@
+{% extends "listapp/mall.html" %}
+{% load crispy_forms_tags %}
+
+{% block innehall %}
+<div class="container py-5">
+        <h1>
+            {{listan.listname}}
+            {% if listan.cuser == user %}
+                <a href="{% url 'lista-uppdatera' listan.id %}"><i class="bi bi-pencil-square"></i></a>
+                <a href="{% url 'lista-radera' listan.id %}"><i class="bi bi-trash"></i></a>
+                <a href="{% url 'object-rensa' listan.id %}">Rensa</a>
+                <a href="{% url 'lista-dela' listan.id %}">Dela</a>
+
+
+            {% endif %}
+        </h1>
+
+    <table>
+        <tr>
+            <th>Vara</th>
+            <th>Antal</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for object in objects %}
+        <tr class="{% if object.purchased %}purchased{% else %}np{% endif %}">
+            <td> <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="object_id" value="{{ object.pk }}">
+                <button type="submit" class="btn btn-link">
+                    {{ object.objectname }}
+                </button>
+              </form></td>
+            <td>{{ object.amount }}</td>
+            <td><a href="{% url 'object-uppdatera' object.id %}"><i class="bi bi-pencil-square"></a></td>
+            <td><a href="{% url 'object-radera' object.id %}"><i class="bi bi-trash"></i></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+        <a class="btn btn-primary" href="{% url 'object-ny' listan.id %}">Ny vara</a>
+
+</div>
+  
+{% endblock %}
