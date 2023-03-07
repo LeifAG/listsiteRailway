@@ -2,10 +2,12 @@
 {% load crispy_forms_tags %}
 
 {% block innehall %}
-  <h1>Share List</h1>
+<div class="container py-5">
+  <h1>Dela lista</h1>
   <form method="post">
     {% csrf_token %}
 		{{ form|crispy }}                    
-    <button type="submit">Share</button>
+    <button type="submit">Dela</button>
   </form>
+</div>
 {% endblock innehall %}
